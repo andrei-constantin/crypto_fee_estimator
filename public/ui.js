@@ -14,17 +14,16 @@ $( document ).ready(function() {
   const start_chart = () => {
     $.ajax({
       url: "/litecoin",
-    }).done(( ) => {
-
+    }).done(( res ) => {
 		var randomScalingFactor = function() {
 			return Math.round(Math.random() * 100);
 		};
 
-		var datapoints = [0, 20, 20, 60, 60, 120, NaN, 180, 120, 125, 105, 110, 170];
+		var datapoints = res['dp'];
 		var config = {
 			type: 'line',
 			data: {
-				labels: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
+				labels: res['labels'],
 				datasets: [{
 					label: 'Cubic interpolation (monotone)',
 					data: datapoints,

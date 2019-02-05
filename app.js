@@ -3,6 +3,8 @@ const bodyParser = require('body-parser');
 const path = require ('path');
 const app = express();
 
+const fee_estimator = require ('./models/fee_estimator.js');
+
 //view engine
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
@@ -27,11 +29,9 @@ app.get('/test', (req, res) => {
     brother: 'Andrei',
   });
 })
-app.get('/litecoin', (req, res) => {
-  return res.render('index',{
-    title: 'invat EJS',
-    content: 'ala bala portocala'
-  });
+app.get('/litecoin', async (req, res) => {
+  const dp = await fee_estimator.fee_estimator();
+  return res.json(dp);
 })
 app.listen(3000, function(){
   console.log('Server started on port 3000...');

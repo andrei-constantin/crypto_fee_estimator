@@ -11,3 +11,5 @@ const knex = require('knex')({
     searchPath: ['public'],
     pool: { min: 1, max: 2 }
 });
+
+module.exports = knex;
