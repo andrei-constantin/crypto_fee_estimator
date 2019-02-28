@@ -2,8 +2,8 @@
 
 ### Prerequisites
 
-The DB from **Backend for crypto fee estimator app**;
-[Nodemon](https://nodemon.io/);
+  - The DB from [**Backend for crypto fee estimator app**](https://github.com/andrei-constantin/crypto_fee_estimator_backend);
+  - [Nodemon](https://nodemon.io/);
 
 ### Installation
 
