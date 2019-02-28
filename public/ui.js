@@ -1,44 +1,22 @@
 
 
 $( document ).ready(function() {
+  const start_chart = ( interval ) => {
 
-  const ajax_test = () => {
-    $.ajax({
-      url: "/test",
-    }).done(( data ) => {
-      let content = `Hello <h1>${ data.name } </h1>, brother of <h1>${data.brother}<h1>`;
-      console.log(content);
-      $("#app").html( content );
-    });
-  }
-  const start_chart = () => {
     $.ajax({
       url: "/litecoin",
+      data: {interval: interval},
     }).done(( res ) => {
 		var randomScalingFactor = function() {
 			return Math.round(Math.random() * 100);
 		};
-
 		var datapoints = res['dp'];
 		var config = {
 			type: 'line',
 			data: {
 				labels: res['labels'],
 				datasets: [{
-					label: 'Cubic interpolation (monotone)',
-					data: datapoints,
-					borderColor: "red",
-					backgroundColor: 'rgba(0, 0, 0, 0)',
-					fill: false,
-					cubicInterpolationMode: 'monotone'
-				}, {
-					label: 'Cubic interpolation (default)',
-					data: datapoints,
-					borderColor: "blue",
-					backgroundColor: 'rgba(0, 0, 0, 0)',
-					fill: false,
-				}, {
-					label: 'Linear interpolation',
+					label: 'Waiting time',
 					data: datapoints,
 					borderColor: "green",
 					backgroundColor: 'rgba(0, 0, 0, 0)',
@@ -50,7 +28,7 @@ $( document ).ready(function() {
 				responsive: true,
 				title: {
 					display: true,
-					text: 'Chart.js Line Chart - Cubic interpolation mode'
+					text: 'Average waiting times for transactions in mempool'
 				},
 				tooltips: {
 					mode: 'index'
@@ -59,18 +37,19 @@ $( document ).ready(function() {
 					xAxes: [{
 						display: true,
 						scaleLabel: {
-							display: true
+							display: true,
+              labelString: 'Fee range (LTC Sat/byte)'
 						}
 					}],
 					yAxes: [{
 						display: true,
 						scaleLabel: {
 							display: true,
-							labelString: 'Value'
+							labelString: 'Average time (min)'
 						},
 						ticks: {
-							suggestedMin: -10,
-							suggestedMax: 200,
+							suggestedMin: 0,
+							suggestedMax: 5,
 						}
 					}]
 				}
@@ -81,6 +60,9 @@ $( document ).ready(function() {
   });
   }
 
+  start_chart(3600);
 
-  start_chart();
+  $(".btn-interval").on('click', function (){
+    start_chart($(this).data('interval'));
+  })
 });

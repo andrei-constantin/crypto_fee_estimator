@@ -1,9 +1,7 @@
 <% include partials/header %>
 
-<!-- Navigation -->
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
-        <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                 <span class="sr-only">Toggle navigation</span>
@@ -11,35 +9,47 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">DONERA UI</a>
+            <a class="navbar-brand" href="#">FEES ESTIMATOR</a>
         </div>
-        <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li>
                     <a href="#home" id="home_url">Home</a>
                 </li>
-                <li>
-                    <a href="#donate" id="donate_url">Donate</a>
-                </li>
             </ul>
         </div>
-        <!-- /.navbar-collapse -->
     </div>
-    <!-- /.container -->
 </nav>
 
 <!-- Page Content -->
 <div class="container">
-    <div class="row">.
+    <div class="row">
       <div id="app">
+        <div class="btn-group btn-group-lg" role="group" aria-label="Chart interval">
+          <div data-interval="3600" type="button" class="btn btn-default btn-interval">1h</div>
+          <div data-interval="10800" type="button" class="btn btn-default btn-interval">3h</div>
+          <div data-interval="36000" type="button" class="btn btn-default btn-interval">10h</div>
+          <div data-interval="86400" type="button" class="btn btn-default btn-interval">1 Day</div>
+          <div data-interval="259200" type="button" class="btn btn-default btn-interval">3 Days</div>
+        </div>
         <div style="width:75%;">
       		<canvas id="canvas"></canvas>
       	</div>
       </div>
     </div>
-    <!-- /.row -->
-
+    <div class="row">
+      <div class="faqs" >
+        <h2 >What represents the graph shown here?</h2>
+        <p ><span >The times displayed here are the average waiting times for the transactions published during the last 24 hours. They are expressed in LTC Satoshis (0.00000001 LTC) per byte of transaction data. Miners usually include transactions with the highest fee/byte first.</span><br><span >Wallets should base their fee calculations on this number, depending on how fast the user needs confirmations.</span></p>
+        <h2 >What does the average time mean?</h2>
+        <p ><span >The delay shown here is the time measured between the first record of a transaction in mempool and the publishing of the first block containing the transaction.  </span></p>
+        <h2 >Which fee should I use?</h2>
+        <div >
+          <p ><span >A good decision can be made only after consulting the charts for more time intervals and see the general trend.</span>
+          <p ><span >You can also check </span><a href="https://jochen-hoenicke.de/queue/#4,24h" >this site</a><span > for more graphical details about the LTC mempool current state.</span></p>
+        </div>
+      </div>
+      <div style = "position: fixed; bottom: 0"> Kindly sponsored by <a href="https://www.boringtechnologies.com/" >Boring Technologies</a></div>
+    </div>
 </div>
-<!-- /.container -->
 <% include partials/footer %>

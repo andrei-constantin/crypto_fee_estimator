@@ -18,21 +18,21 @@ app.use('/static',express.static(path.join(__dirname,'public')));
 
 app.get('/',function(req,res){
   res.render('index',{
-    title: 'invat EJS',
-    content: 'ala bala portocala'
+    title: 'LTC Fee Estimator',
+    content: ''
   });
 })
 
-app.get('/test', (req, res) => {
-  return res.json({
-    name: 'Tudor',
-    brother: 'Andrei',
-  });
-})
 app.get('/litecoin', async (req, res) => {
-  const dp = await fee_estimator.fee_estimator();
-  return res.json(dp);
+  // the first parameter used by fee_estimator() is coin_id from mempool_aggregator
+  const interval = req.query.interval;
+  if (parseInt(interval) <= 259200 ){
+    const dp = await fee_estimator.fee_estimator(1 , interval);
+    return res.json(dp);
+  }
+
 })
+
 app.listen(3000, function(){
   console.log('Server started on port 3000...');
 })
